@@ -2,9 +2,9 @@
 
 <html>
 <head>
-<link href ="styles.css" type="text/css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" rel="stylesheet">
-<title> Number guesser </title>
+	<link href ="styles.css" type="text/css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" rel="stylesheet">
+	<title> Number guesser </title>
 
 </head>
 
@@ -14,42 +14,44 @@
 		<h1> <span class="pink"> Number </span> Guesser </h1>
 	</header>
 	<main>
-	<section id="enter_guess" >
-		<form>
+		<section id="enter_guess" >
+			<form>
 
-			<fieldset id="guessRange">
-				<input type="text" id="guessMin" class="guessRange" placeholder="Minimum" autocomplete="off"> 
-				<input type="text" id="guessMax" class="guessRange" placeholder="Maximum" autocomplete="off"> 
+				<fieldset id="guessRange">
+					<input type="text" id="guessMin" class="guessRange" placeholder="1" autocomplete="off"> 
+					<input type="text" id="guessMax" class="guessRange" placeholder="100" autocomplete="off"> 
+					<input type="submit" value="Set range" id="rangeButton" class="button">
+				</fieldset>
+				<fieldset id="guessInput">
+					<input type="text" id="guessField" class="guessField" placeholder="Enter your guess" autocomplete="off"> 
+				</fieldset>
+				<fieldset id="buttons">
+					<input type="submit" value="Guess" id="guessSubmit" class="button" disabled="true"> 
+					<input type="submit" value="Clear guess" id="guessClear" class="button" disabled="true">
+				</fieldset>
+			</section>
 
-			</fieldset>
-			<fieldset id="guessInput">
-				<input type="text" id="guessField" class="guessField" placeholder="Enter your guess" autocomplete="off"> 
-			</fieldset>
-			<fieldset id="buttons">
-				<input type="submit" value="Guess" id="guessSubmit" class="button" disabled="true"> 
-				<input type="submit" value="Clear guess" id="guessClear" class="button" disabled="true">
-			</fieldset>
-	</section>
 
+			<section id ="showGuess">
 
-	<section id ="showGuess">
+				<p id="lastGuess"> Enter a guess</p>
 
-	<p id="lastGuess"> Enter a guess</p>
+				<p id ="bigNumber"> ... </p>
 
-	<p id ="bigNumber"> ? </p>
+				<p id="lowHi"> </p>
 
-	<p id="lowHi"> <output id="guessMessage"> </output> </p>
+				<p id ="challenge_message"> </p>
 
-	</section>
+			</section>
 
-	<div id="reset"> <input type="reset" value="Reset game" id="guessReset" class="button" disabled="true"> </div>
+			<div id="reset"> <input type="reset" value="Reset game" id="guessReset" class="button" disabled="true"> </div>
 
-	</form>
+		</form>
 
 	</main>
 
 
-<script src ="guesser.js"></script>
+	<script src ="guesser.js"></script>
 
 </body>
 </html>
