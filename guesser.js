@@ -23,6 +23,8 @@ var boxMax = document.getElementById('guessMax');
 var challengeMessage = document.getElementById('challenge_message');
 // Flower that spins upon win
 var flowerSpinner = document.getElementById('flower_spinner');
+// Message that helps guide users through playing the game
+var rangeMessage = document.getElementById('range_message');
 // global variable that will have the integer value of the user's guess. 
 var userGuess; 
 
@@ -41,13 +43,13 @@ window.onload = function() {
 
 //  Pull in the numbers from the range
 function changeRange () {
-checkRange();
-minNum = boxMin.value;
-maxNum = boxMax.value;
-ranNum = randomNumber();
-console.log(ranNum);
-submitRange.setAttribute("disabled","true")
-guess.placeholder ="Enter a number between " + minNum + " and " + maxNum;
+  checkRange();
+  minNum = boxMin.value;
+  maxNum = boxMax.value;
+  ranNum = randomNumber();
+  console.log(ranNum);
+  submitRange.setAttribute("disabled","true")
+  guess.placeholder ="Enter a number between " + minNum + " and " + maxNum;
 };
 
  // Generate Random number
@@ -59,7 +61,7 @@ guess.placeholder ="Enter a number between " + minNum + " and " + maxNum;
 function checkRange (){
   if (boxMax.value <= boxMin.value){
     lastGuess.innerHTML= 'The max range number has to be bigger than the minimum. Try again.';
-   clearText();
+    clearText();
   }; 
 };
 
@@ -75,7 +77,7 @@ function clearText () {
 // What to do if guess is correct
 function correctGuess () {
  guessedNumber.innerHTML = '';
- lastGuess.innerHTML = 'BOOM!';
+ lastGuess.innerHTML = 'BOOM! You got it!';
  challengeMessage.innerHTML ="Think you're so smart? Your range has been increased. Try again."
  boxMin.value = parseInt(minNum) -10;
  boxMax.value = parseInt(maxNum) +10;
@@ -84,6 +86,7 @@ function correctGuess () {
  checkInfo();
  reset.removeAttribute("disabled");
  flowerSpinner.classList.remove('hidden');
+ rangeMessage.innerHTML = "Your range has increased. Guess below."
 };
 
 
