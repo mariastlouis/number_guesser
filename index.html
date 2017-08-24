@@ -15,43 +15,64 @@
 	</header>
 	<main>
 		<section id="enter_guess" >
+			<h3 class="center">Enter a range to guess the random number  </h3>
 			<form>
 
 				<fieldset id="guessRange">
-					<input type="text" id="guessMin" class="guessRange" placeholder="1" autocomplete="off"> 
-					<input type="text" id="guessMax" class="guessRange" placeholder="100" autocomplete="off"> 
-					<input type="submit" value="Set range" id="rangeButton" class="button">
-				</fieldset>
-				<fieldset id="guessInput">
-					<input type="text" id="guessField" class="guessField" placeholder="Enter your guess" autocomplete="off"> 
-				</fieldset>
-				<fieldset id="buttons">
-					<input type="submit" value="Guess" id="guessSubmit" class="button" disabled="true"> 
-					<input type="submit" value="Clear guess" id="guessClear" class="button" disabled="true">
-				</fieldset>
-			</section>
+					<p><label for ="guessMin">
+						Min <input type="number" placeholder="1" class="guessRange" id="guessMin" autocomplete="off">
+					</label>
+					<label for = "guessMax">
+						<input type="text" id="guessMax" class="guessRange" placeholder="100" autocomplete="off"> Max
+						 </label> <p>
+						<label for "rangeButton">
+						<p><input type="submit" value="Set range" id="rangeButton" class="button"></p> 
+						</label>
+					</fieldset>
+					<fieldset id="guessInput">
+						<label for = "guessField">
+						<input type="text" id="guessField" class="guessField" placeholder="Enter your guess" autocomplete="off"> 
+						</label>
+					</fieldset>
+					<fieldset id="buttons">
+						<label for = "guessSubmit">
+						<input type="submit" value="Guess" id="guessSubmit" class="button" disabled="true"> 
+						</label>
+						<label for ="guessClear">
+						<input type="submit" value="Clear guess" id="guessClear" class="button" disabled="true">
+						</label>
+					</fieldset>
+				</section>
 
 
-			<section id ="showGuess">
+				<section id ="showGuess">
 
-				<p id="lastGuess"> Enter a guess</p>
+					<p id="lastGuess"> Enter a guess</p>
 
-				<p id ="bigNumber"> ... </p>
+					<p id ="bigNumber"> ... </p>
 
-				<p id="lowHi"> </p>
-
-				<p id ="challenge_message"> </p>
-
-			</section>
-
-			<div id="reset"> <input type="reset" value="Reset game" id="guessReset" class="button" disabled="true"> </div>
-
-		</form>
-
-	</main>
+					<div class="hidden" id="flower_spinner"> <img class="image" id="flower_spinner" src="flower.png" alt="spinning flower when guess is correct"> </div>
 
 
-	<script src ="guesser.js"></script>
 
-</body>
-</html>
+					<p id="lowHi"> </p>
+
+					<p id ="challenge_message"> </p>
+
+				</section>
+
+				<div id="reset">
+				<label for ="guessReset">
+				<input type="reset" value="Reset game" id="guessReset" class="button" disabled="true">
+				</label>
+				</div> 
+
+			</form>
+
+		</main>
+
+
+		<script src ="guesser.js"></script>
+
+	</body>
+	</html>

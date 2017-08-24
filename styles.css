@@ -25,25 +25,38 @@
 /*header styles*/
 
 header {
-	height: 68px;
+	height: 15%;
 	background-color: #404041;
 	text-align: center;
 }
 
 h1
 {
-	/*font-family: 'Open Sans', sans-serif;*/
 	padding: 10px;
 	color: #E6E7E8;
+  font-size: 35pt;
 	}
+
+  h3 {
+    margin: 10px;
+    text-align: center;
+  }
+/*main body styles*/
+
+label {
+  color: #d3d3d3;
+}
+
+#challenge_message {
+ color: #ED458B; 
+ margin-top: 30px;
+}
 
 .pink {
 	color: #ED458B;
 	font-weight: 700;
 }
 
-
-/*main body styles*/
 
 fieldset {
 	border: none;
@@ -55,20 +68,23 @@ fieldset {
 	margin: 25px 10px 15px;
 }
 
+#rangeButton {
+  width: 30%;
+  margin-top: 10px;
+}
+
 input {
 	padding: 5px;
 	font-size: 18px;
 }
 
+#guessMin, #guessMax{
+  width: 75px;
+}
+
 #guessInput input {
   width: 50%;
   }
-
-#guessRange input {
-  width: 20%;
-  margin: 15px;
-}
-
 
 #guessInput input.text:focus {
 	border: 1px solid #929497;
@@ -76,7 +92,6 @@ input {
 
 #showGuess {
 	text-align: center;
-	/*font-family: 'Open Sans', sans-serif;*/
 	margin: 20px 5px 50px;
 }
 
@@ -95,6 +110,28 @@ font-size: 100px;
 	margin: 20px 0px 50px;
 }
 
+.hidden {
+  display: none;
+}
+
+#flower_spinner {
+  height: 120px;
+  position: relative;
+  margin: 10px;
+  text-align: center;
+}
+.image {
+    display: inline-block;
+    -webkit-animation:spin 3s linear;
+    -moz-animation:spin 3s linear;
+    animation:spin 3s linear;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
+
 /*button styles*/
 
 .button {
@@ -102,8 +139,6 @@ font-size: 100px;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 28px;
-/* font-family: 'Open Sans', sans-serif;
-	font-weight: 300;*/
   color: #FFFFFF;
   font-size: 18px;
   padding: 5px 10px 5px 10px;
@@ -130,3 +165,5 @@ font-size: 100px;
 #guessReset {
 	width: 50%;
 }
+
+

@@ -1,7 +1,3 @@
-// var randomNumber =
-// Math.floor(Math.random()*100 +1);
-// console.log(randomNumber);
-// User guess
 var guess = document.getElementById('guessField');
 // Tells whether user is low or high and for out of range messages
 var guessMessage = document.getElementById('lowHi');
@@ -11,9 +7,9 @@ var guessedNumber = document.getElementById('bigNumber');
 var clear = document.getElementById('guessClear');
 // reset button
 var reset = document.getElementById('guessReset');
-// creates message 'your last guess was'
-var lastGuest = document.getElementById('lastGuess');
-// range button 
+// creates message 'your last guess was' and adds other messages to user
+var lastGuess = document.getElementById('lastGuess');
+// button that sets range
 var submitRange = document.getElementById('rangeButton');
 // set minimum number to 0 initially
 var minNum = 0;
@@ -25,7 +21,11 @@ var maxNum = 100;
 var boxMax = document.getElementById('guessMax');
 // Area to put text to challenge user to increase range
 var challengeMessage = document.getElementById('challenge_message');
-// Button to increase range
+// Flower that spins upon win
+var flowerSpinner = document.getElementById('flower_spinner');
+// global variable that will have the integer value of the user's guess. 
+var userGuess; 
+
 
 // Set Default values 
 function defaultValues(){
@@ -41,28 +41,14 @@ window.onload = function() {
 
 //  Pull in the numbers from the range
 function changeRange () {
-// event.preventDefault();
 checkRange();
 minNum = boxMin.value;
 maxNum = boxMax.value;
 ranNum = randomNumber();
 console.log(ranNum);
 submitRange.setAttribute("disabled","true")
+guess.placeholder ="Enter a number between " + minNum + " and " + maxNum;
 };
-
-// submitRange.addEventListener('click', function(){
-//   event.preventDefault();
-//   checkRange();
-// // check range here later
-// minNum = boxMin.value;
-// maxNum = boxMax.value;
-// ranNum = randomNumber();
-// console.log(ranNum);
-// submitRange.setAttribute("disabled", "true");
-
-// // enable set range button
-// // add text here
-// });
 
  // Generate Random number
  function randomNumber() {
@@ -70,18 +56,57 @@ submitRange.setAttribute("disabled","true")
 };
 
 // Check to see if max number is bigger than min number
-
-
 function checkRange (){
   if (boxMax.value <= boxMin.value){
     lastGuess.innerHTML= 'The max range number has to be bigger than the minimum. Try again.';
-    guessMessage.innerHTML="";
-    guessedNumber.innerHTML="";
+   clearText();
   }; 
 };
 
-// check to see if guess matches random number. 
-var userGuess; 
+
+// Clears all of the messages from previous guesses and ensures flower does not pop up when not wanted
+function clearText () {
+  guessMessage.innerHTML="";
+  guessedNumber.innerHTML="";
+  challengeMessage.innerHTML =""
+  flowerSpinner.classList.add('hidden');
+};
+
+// What to do if guess is correct
+function correctGuess () {
+ guessedNumber.innerHTML = '';
+ lastGuess.innerHTML = 'BOOM!';
+ challengeMessage.innerHTML ="Think you're so smart? Your range has been increased. Try again."
+ boxMin.value = parseInt(minNum) -10;
+ boxMax.value = parseInt(maxNum) +10;
+ guess.value = "";
+ changeRange();
+ checkInfo();
+ reset.removeAttribute("disabled");
+ flowerSpinner.classList.remove('hidden');
+};
+
+
+// what to do if guess is too high
+function highGuess () {
+ guessMessage.innerHTML  = 'That is too high';
+ guessedNumber.innerHTML = userGuess;
+ lastGuess.innerHTML = 'Your last guess was'
+ challengeMessage.innerHTML =""
+ flowerSpinner.classList.add('hidden');
+};
+
+
+// what to do if guess is too low
+function lowGuess() {
+  lastGuess.innerHTML = 'Your last guess was'
+  guessMessage.innerHTML = 'That is too low';
+  flowerSpinner.classList.add('hidden');
+  guessedNumber.innerHTML = userGuess;
+  challengeMessage.innerHTML =""
+};
+
+// checks to see if guess matches the random number
 
 function checkGuess (event) {
   event.preventDefault();
@@ -89,79 +114,46 @@ function checkGuess (event) {
   userGuess = parseInt(guess.value);
   if (isNaN(userGuess)) {
     lastGuess.innerHTML= 'That value is not a number. Try again.';
-    guessMessage.innerHTML="";
-    guessedNumber.innerHTML="";
-  } 
-  else if (parseInt(guess.value) < minNum || parseInt(guess.value) > maxNum) {
+    clearText();
+    // Now make sure number is in range
+  } else if (parseInt(guess.value) < minNum || parseInt(guess.value) > maxNum) {
     lastGuess.innerHTML='Number is out of range, your number needs to be between ' + minNum + ' and ' + maxNum + '.';
-    guessMessage.innerHTML="";
-    guessedNumber.innerHTML="";
+    clearText();
   } else if (userGuess === ranNum) {
-    guessMessage.innerHTML = 'Boom';
-    guessedNumber.innerHTML = 'Way to go!';
-    challengeMessage.innerHTML ="Think you're so smart? Your range has been increased. Try again."
-    boxMin.value = parseInt(minNum) -10;
-    boxMax.value = parseInt(maxNum) +10;
-    guess.value = "";
-    lastGuess.innerHTML='';
-    changeRange();
-    checkInfo();
-    
+    correctGuess();
+    guessMessage.innerHTML="";
   } else if (userGuess < ranNum && userGuess >= minNum) {
-    guessMessage.innerHTML = 'That is too low';
-  // lastGuess.innerHTML = 'Your last guess was'
-  guessedNumber.innerHTML = userGuess;
-} else if (userGuess > ranNum){
-  guessMessage.innerHTML  = 'That is too high';
-  guessedNumber.innerHTML = userGuess;
-  lastGuess.innerHTML = 'Your last guess was'
-}
-  // else if (valueIsNan = true){
-  //   guessMessage.innerHTML = 'Um that is not a number. Guess again.';
-  // guessedNumber.innerHTML = '';
-  //  lastGuess.innerHTML = '';
-  // }
+    lowGuess();
+  } else if (userGuess > ranNum){
+    highGuess();
+  }
   else {
    lastGuess.innerHTML='Try guessing again';
-   guessMessage.innerHTML="";
-   guessedNumber.innerHTML="";
+   clearText();
 
  }
 }
 
-// Increase range when you click a button 
-// challengeButton.addEventListener('click', function() {
-//   boxMin.value = parseInt(minNum) -10;
-//   boxMax.value = parseInt(maxNum) +10;
-//   submitRange.removeAttribute("disabled");
-//   challengeMessage.innerHTML = "";
-//   challengeButton.setAttribute("disabled", "true");
-//   guess.value = "";
-//   changeRange();
-//   checkInfo ();
-// });
-/* Clear the text field */
-
+// clear button
 function clearFields(event) {
   event.preventDefault();
-  //reset guess value
   guess.value = "";
   guessMessage.innerHTML = "";
 }
 
-/* Enable reset button  */
+// reset button
 function resetButton() {
   window.location.reload();
 }
 
-// check to see if anything is input in the number field
+// disable buttons until something is in the input field
 function checkInfo (){
   //first check for info 
   if (guess.value === "") {
     // If no info disable button 
     guessSubmit.setAttribute("disabled", "true");
-    reset.removeAttribute("disabled");
-    clear.removeAttribute("disabled");
+    reset.setAttribute("disabled", "true");
+    clear.setAttribute("disabled", "true");
   }
   //If info then enable button
   else {
@@ -174,10 +166,7 @@ function checkInfo (){
 
 
 clear.addEventListener('click', clearFields);
-
 guess.addEventListener('input', checkInfo);
 reset.addEventListener('click', resetButton);
 guessSubmit.addEventListener('click', checkGuess);
 submitRange.addEventListener('click', changeRange);
-// still need- update UI
-// when you level up - I'd like the range to be automatically submitted and a random number generated
